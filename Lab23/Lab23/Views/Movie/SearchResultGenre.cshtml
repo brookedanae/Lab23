@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MovieSearchViewModel>
+
+@{
+    ViewData["Title"] = "SearchResultGenre";
+}
+
+<h1>Movies by Genre</h1>
+<br />
+<div>
+    <a asp-action="Index">Want a different one? Search Again</a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Runtime)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Runtime)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

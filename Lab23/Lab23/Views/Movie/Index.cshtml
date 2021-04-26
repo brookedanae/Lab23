@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MovieViewModel>
+@{
+}
+
+<h1>Movies</h1>
+<p>
+    <a asp-action="Register">Register Another Movie</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Runtime)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(x => item.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(x => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(x => item.Runtime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Title">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Title">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Title">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
