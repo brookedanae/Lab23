@@ -19,6 +19,10 @@ namespace Lab23.Repositories
         Task<MovieViewModel> Get(int id);
 
         Task Update(MovieViewModel movie);
+        Task<List<MovieViewModel>> GetByName(string name);
+
+        Task<List<MovieViewModel>> GetByGenre(string genre);
+
         //void Save(MovieViewModel model);
     }
 }

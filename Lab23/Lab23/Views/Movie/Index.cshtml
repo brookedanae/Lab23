@@ -5,13 +5,15 @@
 <h1>Movies</h1>
 <p>
     <a asp-action="Register">Register Another Movie</a>
+<p>Search by Genre<a asp-controller="Movie" asp-action="SearchByGenre"> here</a>.</p>
+<p>Search by Title<a asp-controller="Movie" asp-action="SearchByTitle"> here</a>.</p>
 </p>
 <table class="table">
     <thead>
         <tr>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.Id)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -26,25 +28,25 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            @*<td>
-                @Html.DisplayFor(x => item.Id)
-            </td>*@
-            <td>
-                @Html.DisplayFor(x => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(x => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(x => item.Runtime)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Title">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Title">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Title">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Runtime)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

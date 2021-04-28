@@ -10,21 +10,22 @@ namespace Lab23.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly IMovieRepository _repository;
 
-        public MovieController(IMovieRepository repository)
+        private readonly IMovieRepository _context;
+
+        public MovieController(IMovieRepository context)
         {
-            _repository = repository;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _repository.Get());
+            return View(await _context.Get());
         }
 
         public async Task<IActionResult> Details(int? id)
         {
-            var results = await _repository.Get(id.Value);
+            var results = await _context.Get(id.Value);
             return View(results);
         }
 
@@ -41,14 +42,30 @@ namespace Lab23.Controllers
                 return View(model);
             }
 
-            await _repository.Register(model);
+            await _context.Register(model);
             return RedirectToAction("Index");
         }
 
-        //public IActionResult SearchResultGenre(MovieSearchViewModel model)
-        //{
-        //    var list = _repository.Get().Where(x => x.Genre == model.Genre);
-        //    return View(list);
-        //}
+        public IActionResult SearchByGenre()
+        {
+            return View();
+        }
+
+        public async Task <IActionResult> SearchResultGenre(MovieSearchViewModel model)
+        {
+            var list = await _context.GetByGenre(model.Genre);
+            return View(list);
+        }
+
+        public IActionResult SearchByTitle()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> SearchResultTitle(MovieSearchViewModel model)
+        {
+            var list = await _context.GetByName(model.Title);
+            return View(list);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Lab23.Data;
 using Lab23.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,24 @@ namespace Lab23.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<MovieViewModel>> Get()
+        public async Task<List<MovieViewModel>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.Movies.ToListAsync();
+            //SELECT *
+            //FROM dbo.Movies
+        }
+
+        public async Task<List<MovieViewModel>> GetByName(string name)
+        {
+            return await _context.Movies.Where(x => x.Title.Contains(name)).ToListAsync();
+            // SELECT *
+            // FROM dbo.Movies
+            // WHERE Title LIKE '%<Name>%'
+        }
+
+        public async Task<List<MovieViewModel>> GetByGenre(string genre)
+        {
+            return await _context.Movies.Where(x => x.Genre.Contains(genre)).ToListAsync();
         }
 
         public Task<MovieViewModel> Get(int id)

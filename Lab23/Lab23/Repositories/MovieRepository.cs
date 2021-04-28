@@ -12,8 +12,6 @@ namespace Lab23.Repositories
     {
         private readonly MovieDbContext _context;
 
-        //private readonly List<MovieViewModel> _movies = new List<MovieViewModel>();
-
         public MovieRepository(MovieDbContext context)
         {
             _context = context;
@@ -24,9 +22,10 @@ namespace Lab23.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            _context.Movies.RemoveRange();
+            await _context.SaveChangesAsync();
         }
 
         public Task<bool> Exists(int id)
@@ -36,25 +35,6 @@ namespace Lab23.Repositories
 
         public async Task<List<MovieViewModel>> Get()
         {
-            //var result = new List<MovieViewModel>();
-
-            //result.Add(new MovieViewModel(1, "What About Bob?", "Comedy", 100));
-            //result.Add(new MovieViewModel(2, "Seven", "Thriller", 125));
-            //result.Add(new MovieViewModel(3, "Whiplash", "Drama", 106));
-            //result.Add(new MovieViewModel(4, "Liar Liar", "Comedy", 83));
-            //result.Add(new MovieViewModel(5, "Gone in 60 Seconds", "Action", 117));
-            //result.Add(new MovieViewModel(6, "The Conjuring", "Horror", 111));
-            //result.Add(new MovieViewModel(7, "Space Jam", "Comedy", 87));
-            //result.Add(new MovieViewModel(8, "Now and Then", "Drama", 96));
-            //result.Add(new MovieViewModel(9, "Us", "Horror", 116));
-            //result.Add(new MovieViewModel(10, "Jurassic Park", "Action", 126));
-            //result.Add(new MovieViewModel(11, "Forrest Gump", "Drama", 142));
-            //result.Add(new MovieViewModel(12, "Clueless", "Comedy", 97));
-            //result.Add(new MovieViewModel(13, "The Fast and The Furious", "Action", 107));
-            //result.Add(new MovieViewModel(14, "The Strangers", "Horror", 88));
-            //result.Add(new MovieViewModel(15, "Annihilation", "Scifi", 115));
-
-            ////return Task.FromResult(result);
             return await _context.Movies.ToListAsync();
 
         }
@@ -72,6 +52,17 @@ namespace Lab23.Repositories
         public Task Update(MovieViewModel movie)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<MovieViewModel>> GetByName(string title)
+        {
+            return await _context.Movies.Where(x => x.Title.Contains(title)).ToListAsync();
+
+        }
+
+        public async Task<List<MovieViewModel>> GetByGenre(string genre)
+        {
+            return await _context.Movies.Where(x => x.Genre.Contains(genre)).ToListAsync();
         }
     }
 }

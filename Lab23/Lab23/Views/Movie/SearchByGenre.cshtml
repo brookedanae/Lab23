@@ -1,0 +1,33 @@
+﻿@model MovieSearchViewModel
+
+@{
+    ViewData["Title"] = "SearchByGenre";
+}
+
+<h1>Movies by Genre</h1>
+<br />
+<div>
+</div>
+<h1>It's movie time!</h1>
+<br />
+<h4>What do you want to watch?</h4>
+<br />
+
+<h5>*Use the search function below to find your next movie.</h5>
+<hr />
+<h5>Search by Genre:</h5>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SearchResultGenre">
+            @*<select asp-for="">
+                <option selected="selected" value="">Please select a genre:</option>
+            </select>*@
+            <input asp-for="Genre" />
+            <input type="submit" class="btn btn-primary" value="Search" />
+        </form>
+    </div>
+</div>
+
+<a asp-action="Index">Want a different one? Search Again</a>
+
